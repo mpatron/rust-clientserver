@@ -4,11 +4,11 @@ COPY . .
 RUN cargo install --verbose --path .
 
 FROM ubuntu:22.04
-# RUN apt-get update && apt-get install -y extra-runtime-dependencies && rm -rf /var/lib/apt/lists/*
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
-
+RUN apt-get update && apt-get install -y ca-certificates ncat && rm -rf /var/lib/apt/lists/*
+# Ne fonctionne pas encore avec alpine. L'image passerait de 86Mo à 11Mo...
 # FROM alpine:3.19.1
-# RUN apk add --no-cache ca-certificates
+# RUN apk add --no-cache ca-certificates netcat-openbsd
+
 COPY --from=builder /usr/src/myapp/target/release/rserver /usr/local/bin/rserver
 EXPOSE 3333
 CMD [ "/usr/local/bin/rserver" ]

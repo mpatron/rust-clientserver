@@ -12,3 +12,10 @@ docker run -it rust-cs/rclient bash
 docker rm rserver || docker run --name rserver -a STDERR -p 3333:3333 rust-cs/rserver
 docker run -it rust-cs/rserver sh
 ~~~
+
+~~~bash
+docker-compose build && docker-compose up
+docker-compose run --rm rserver
+docker-compose run --rm rclient # Too quick to go in
+docker-compose down
+~~~

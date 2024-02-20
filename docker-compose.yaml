@@ -1,17 +1,18 @@
+---
 services:
   rserver:
     build: rserver/.
     ports:
       - "3333:3333"
-#    healthcheck:
-#        test: ["CMD", "nc", "-v", "-z", "127.0.0.1", "3333"]
-#        interval: 10s
-#        timeout: 4s
-#        retries: 2
+    healthcheck:
+      test: ["CMD", "nc", "-v", "-z", "rserver", "3333"]
+      interval: 10s
+      timeout: 4s
+      retries: 2
   rclient:
     build: rclient/.
     depends_on:
-#      rserver:
-#        condition: service_healthy
+      rserver:
+        condition: service_healthy
     links:
-    - rserver
+      - rserver
