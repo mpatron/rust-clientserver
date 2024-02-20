@@ -14,7 +14,7 @@ docker run -it rust-cs/rserver sh
 ~~~
 
 ~~~bash
-docker-compose build && docker-compose up
+docker-compose build && docker-compose up && docker-compose logs -f -t
 docker-compose run --rm rserver
 docker-compose run --rm rclient # Too quick to go in
 docker-compose down

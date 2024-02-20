@@ -1,4 +1,4 @@
-FROM rust:slim
+FROM rust:1.76-slim
 WORKDIR /usr/src/myapp
 COPY . .
 # => /usr/src/myapp/target/release/rclient
