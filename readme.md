@@ -14,8 +14,14 @@ docker run -it rust-cs/rserver sh
 ~~~
 
 ~~~bash
-docker-compose build && docker-compose up && docker-compose logs -f -t
+docker-compose down && docker-compose rm && docker rm -f $(docker ps -a -q) && docker volume rm $(docker volume ls -q) && docker-compose build && docker-compose up && docker-compose logs -f -t
 docker-compose run --rm rserver
 docker-compose run --rm rclient # Too quick to go in
 docker-compose down
+~~~
+
+~~~bash
+rustup target add x86_64-unknown-linux-musl
+cd rserver
+cargo build --target x86_64-unknown-linux-musl
 ~~~

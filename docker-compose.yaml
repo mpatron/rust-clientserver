@@ -1,7 +1,10 @@
 ---
 services:
   rserver:
-    build: rserver/.
+    build:
+      context: rserver
+      dockerfile: Dockerfile
+    # build: rserver/Dockerfile.alpine
     ports:
       - "3333:3333"
     healthcheck:
