@@ -1,8 +1,10 @@
 use std::net::TcpStream;
 use std::io::{Read, Write};
 use std::str::from_utf8;
+use std::time::{Duration, Instant};
 
 fn main() {
+    let start = Instant::now();
     match TcpStream::connect("rserver:3333") {
         Ok(mut stream) => {
             println!("Successfully connected to server in port 3333");
@@ -31,5 +33,6 @@ fn main() {
             println!("Failed to connect: {}", e);
         }
     }
-    println!("Terminated.");
+    let duration = start.elapsed();
+    println!("Terminated. Time elapsed is: {:?}", duration);
 }
