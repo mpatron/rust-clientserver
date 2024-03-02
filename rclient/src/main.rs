@@ -2,9 +2,16 @@ use std::net::TcpStream;
 use std::io::{Read, Write};
 use std::str::from_utf8;
 use std::time::{Duration, Instant};
+use chrono::{DateTime, Utc, Local};
 
 fn main() {
     let start = Instant::now();
+
+    let local_time = Local::now();
+    let utc_time = DateTime::<Utc>::from_utc(local_time.naive_utc(), Utc);
+    println!("Local time now is {}", local_time);
+    println!("UTC time now is {}", utc_time);
+
     match TcpStream::connect("rserver:3333") {
         Ok(mut stream) => {
             println!("Successfully connected to server in port 3333");
