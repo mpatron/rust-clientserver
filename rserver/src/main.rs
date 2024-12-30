@@ -1,12 +1,16 @@
 use std::thread;
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::io::{Read, Write};
+use std::str::from_utf8;
 
 fn handle_client(mut stream: TcpStream) {
     let mut data = [0 as u8; 50]; // using 50 byte buffer
     while match stream.read(&mut data) {
         Ok(size) => {
             // echo everything!
+            let text = from_utf8(&data).unwrap();
+            println!("Unexpected reply: {}", text);
+
             stream.write(&data[0..size]).unwrap();
             true
         },
