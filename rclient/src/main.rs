@@ -12,7 +12,7 @@ fn main() {
     println!("Local time now is {}", local_time);
     println!("UTC time now is {}", utc_time);
 
-    match TcpStream::connect("rserver:3333") {
+    match TcpStream::connect("127.0.0.1:3333") {
         Ok(mut stream) => {
             println!("Successfully connected to server in port 3333");
 

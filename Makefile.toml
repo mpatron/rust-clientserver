@@ -10,9 +10,16 @@ cwd = "./rserver/"
 command = "cargo"
 args = ["make", "podman-image"]
 
+[tasks.server-run]
+description = "Lancement du serveur."
+command = "podman"
+args = ["run", "--name", "rserver", "-ti", "--detach", "--rm", "--publish", "3333:3333", "pubuntu:latest"]
+dependencies = ["build-rclient", "build-rserver"]
+
 [tasks.all]
 description = "Exécute toutes les tâches."
-dependencies = ["build-rclient", "build-rserver"]
+command = "./rclient/target/debug/rclient"
+dependencies = ["server-run"]
 
 [tasks.default]
 alias = "all"
