@@ -1,14 +1,14 @@
-use std::net::TcpStream;
+use chrono::{DateTime, Local, Utc};
 use std::io::{Read, Write};
+use std::net::TcpStream;
 use std::str::from_utf8;
-use std::time::{Duration, Instant};
-use chrono::{DateTime, Utc, Local};
+use std::time::Instant;
 
 fn main() {
     let start = Instant::now();
 
     let local_time = Local::now();
-    let utc_time = DateTime::<Utc>::from_utc(local_time.naive_utc(), Utc);
+    let utc_time = DateTime::<Utc>::from_naive_utc_and_offset(local_time.naive_utc(), Utc);
     println!("Local time now is {}", local_time);
     println!("UTC time now is {}", utc_time);
 
@@ -30,12 +30,12 @@ fn main() {
                         let text = from_utf8(&data).unwrap();
                         println!("Unexpected reply: {}", text);
                     }
-                },
+                }
                 Err(e) => {
                     println!("Failed to receive data: {}", e);
                 }
             }
-        },
+        }
         Err(e) => {
             println!("Failed to connect: {}", e);
         }
