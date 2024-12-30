@@ -13,7 +13,7 @@ args = ["make", "podman-image"]
 [tasks.server-run]
 description = "Lancement du serveur."
 command = "podman"
-args = ["run", "--name", "rserver", "-ti", "--detach", "--rm", "--publish", "3333:3333", "pubuntu:latest"]
+args = ["run", "--replace", "--name", "rserver", "-ti", "--detach", "--rm", "--publish", "3333:3333", "pubuntu:latest"]
 dependencies = ["build-rclient", "build-rserver"]
 
 [tasks.all]
