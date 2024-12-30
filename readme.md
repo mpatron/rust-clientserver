@@ -25,3 +25,5 @@ rustup target add x86_64-unknown-linux-musl
 cd rserver
 cargo build --target x86_64-unknown-linux-musl
 ~~~
+
+podman run --detach --rm rust-cs/rserver:latest -p 3333:3333

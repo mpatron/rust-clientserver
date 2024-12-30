@@ -1,0 +1,20 @@
+# Makefile.toml
+
+[tasks.build-rclient]
+cwd = "./rclient/"
+command = "cargo"
+args = ["make", "all"]
+
+[tasks.build-rserver]
+cwd = "./rserver/"
+command = "cargo"
+args = ["make", "podman-image"]
+
+[tasks.all]
+description = "Exécute toutes les tâches."
+dependencies = ["build-rclient", "build-rserver"]
+
+[tasks.default]
+alias = "all"
+
+# sudo sed -i "s/^bind-address.*/bind-address=0.0.0.0/g" "/etc/mysql/mariadb.conf.d/50-server.cnf"

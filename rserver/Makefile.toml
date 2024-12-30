@@ -1,0 +1,54 @@
+# Makefile.toml
+
+[tasks.format]
+install_crate = "rustfmt"
+command = "cargo"
+args = ["fmt", "--", "--emit=files"]
+
+[tasks.clean]
+description = "Nettoie les fichiers de construction."
+command = "cargo"
+args = ["clean"]
+
+[tasks.build]
+description = "Compile le projet Rust."
+command = "cargo"
+args = ["build"]
+dependencies = ["clean"]
+
+[tasks.build-release]
+description = "Compile le projet Rust."
+command = "cargo"
+args = ["build", "--release"]
+dependencies = ["clean"]
+
+[tasks.test]
+description = "Exécute les tests du projet."
+command = "cargo"
+args = ["test"]
+dependencies = ["clean"]
+
+[tasks.install]
+description = "Installe le projet."
+command = "cargo"
+args = ["install", "--path", "."]
+
+[tasks.my-flow]
+dependencies = ["format", "build-release", "test", "install"]
+
+[tasks.podman-image]
+description = "Compile l'image podman."
+command = "podman"
+args = ["build", "-t", "rust-cs/rserver", "."]
+dependencies = ["all"]
+
+[tasks.all]
+description = "Exécute toutes les tâches."
+dependencies = ["clean", "build", "test"]
+
+[tasks.default]
+alias = "all"
+
+# cargo install --force cargo-make
+# cargo make
+# cargo make my-flow
