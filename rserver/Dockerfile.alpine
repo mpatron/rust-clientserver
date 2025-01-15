@@ -1,4 +1,4 @@
-FROM rust:1.76-slim as backend
+FROM rust:1.83-slim as backend
 ENV RUSTFLAGS='-C linker=x86_64-linux-gnu-gcc'
 ENV CC_x86_64_unknown_linux_musl=clang
 ENV AR_x86_64_unknown_linux_musl=llvm-ar

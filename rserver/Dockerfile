@@ -3,7 +3,7 @@ WORKDIR /usr/src/myapp
 COPY . .
 RUN cargo install --verbose --path .
 
-FROM docker.io/ubuntu:22.04
+FROM docker.io/ubuntu:24.04
 RUN apt-get update && apt-get install -y ca-certificates ncat && rm -rf /var/lib/apt/lists/*
 # Ne fonctionne pas encore avec alpine. L'image passerait de 86Mo à 11Mo...
 # FROM alpine:3.19.1

@@ -26,4 +26,7 @@ cd rserver
 cargo build --target x86_64-unknown-linux-musl
 ~~~
 
+~~~bash
 podman run --detach --rm rust-cs/rserver:latest -p 3333:3333
+cargo make
+~~~
